@@ -17,8 +17,8 @@ public class Menu {
     public static OrderItem getItem(int position, int qty) {
         if(position < 1 || position > menu.size()) return null;
 
-        OrderItem clone = menu.get(position - 1).clone();
-        clone.setOrderedQty(qty);
-        return clone;
+        OrderItem meniuDaiktoKopija = menu.get(position - 1).clone();
+        meniuDaiktoKopija.setOrderedQty(qty);
+        return meniuDaiktoKopija;
     }
 }

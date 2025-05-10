@@ -23,10 +23,14 @@ public class OrderItem implements Cloneable {
     public OrderItem clone() {
         try {
             OrderItem clone = (OrderItem) super.clone();
-            // TODO: copy mutable state here, so the clone can't change the internals of the original
             return clone;
         } catch (CloneNotSupportedException e) {
             throw new AssertionError();
         }
+    }
+
+    @Override
+    public String toString() {
+        return "%s%s - %s x %seur".formatted(name, vegan ? " (V)" : "", orderedQty, price);
     }
 }

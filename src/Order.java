@@ -1,18 +1,17 @@
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Order {
 
     private final String numeris;
-    private String aprasymas;
-    private double suma;
+    private ArrayList<OrderItem> orderItems = new ArrayList<>();
 
     private boolean vietoje;
     private String statusas;
 
     // sukurti uzsakyma
-    public Order(String a, double s, boolean v) {
-        aprasymas = a;
-        suma = s;
+    public Order(OrderItem item, boolean v) {
+        orderItems.add(item);
         vietoje = v;
         numeris = "#" + new Random().nextInt(1000, 10000);
         statusas = "Pateiktas";
@@ -20,8 +19,9 @@ public class Order {
 
     // cekio formavimas
     public String formuotiCeki() {
-        return "%s - %sEur\n%s\n".formatted(numeris, suma, aprasymas) +
-                (vietoje ? "Vietoje" : "Išsinešimui");
+//        return "%s - %sEur\n%s\n".formatted(numeris, suma, aprasymas) +
+//                (vietoje ? "Vietoje" : "Išsinešimui");
+        return "";
     }
 
     // pakeisti statusa
@@ -31,10 +31,8 @@ public class Order {
     }
 
     // papildyti uzsakyma
-    public void papildytiUzsakyma(String papildomasAprasymas, double papildomaSuma) {
-//        aprasymas = aprasymas + papildomasAprasymas;
-        aprasymas += "\n" + papildomasAprasymas;
-        suma += papildomaSuma;
+    public void papildytiUzsakyma(OrderItem item) {
+        orderItems.add(item);
     }
 
     public String getStatusas() {

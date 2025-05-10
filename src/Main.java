@@ -8,6 +8,9 @@ public class Main {
         Scanner s = new Scanner(System.in);
         HashMap<String, Order> uzsakymai = new HashMap<>();
 
+        OrderItem item = Menu.getItem(1, 3);
+        System.out.println(item);
+
         Order selectedOrder = null;
         while(true) {
             System.out.println("Enter a command:");
@@ -30,7 +33,7 @@ public class Main {
                     System.out.println("Take-away? (y/n)");
                     boolean vietoje = !s.next().equalsIgnoreCase("y");
 
-                    selectedOrder = new Order(aprasymas, suma, vietoje);
+//                    selectedOrder = new Order(aprasymas, suma, vietoje);
                     uzsakymai.put(selectedOrder.getNumeris(), selectedOrder);
                     System.out.println("New order " + selectedOrder.getNumeris() + " created");
                 }
@@ -40,7 +43,7 @@ public class Main {
                     s.nextLine();
                     String aprasymas = s.nextLine();
                     double suma = s.nextDouble();
-                    selectedOrder.papildytiUzsakyma(aprasymas, suma);
+//                    selectedOrder.papildytiUzsakyma(aprasymas, suma);
                 }
                 case "orderStatus" -> {
                     if(!uzsakymasPasirinktas(selectedOrder)) break;
