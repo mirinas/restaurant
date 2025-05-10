@@ -14,8 +14,11 @@ public class Menu {
         menu.add(new Dessert("Apple pie", 4.90, false));
     }
 
-    public static OrderItem getItem(int position) {
+    public static OrderItem getItem(int position, int qty) {
         if(position < 1 || position > menu.size()) return null;
-        return menu.get(position - 1);
+
+        OrderItem clone = menu.get(position - 1).clone();
+        clone.setOrderedQty(qty);
+        return clone;
     }
 }

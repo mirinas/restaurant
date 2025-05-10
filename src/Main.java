@@ -8,7 +8,6 @@ public class Main {
         Scanner s = new Scanner(System.in);
         HashMap<String, Order> uzsakymai = new HashMap<>();
 
-
         Order selectedOrder = null;
         while(true) {
             System.out.println("Enter a command:");

@@ -11,4 +11,8 @@ public class Beverage extends OrderItem {
     public enum Type {
         ZERO, ALCO, DIET, STANDART
     }
+
+    public Type getType() {
+        return type;
+    }
 }
