@@ -15,4 +15,10 @@ public class Beverage extends OrderItem {
     public Type getType() {
         return type;
     }
+
+    @Override
+    public String toString() {
+        return "%s%s %sml - %s x %seur".formatted(name,
+                type != Type.STANDART ? (" " + type) : "", volume, orderedQty, price);
+    }
 }

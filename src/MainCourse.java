@@ -9,4 +9,9 @@ public class MainCourse extends OrderItemWithSize {
     public enum Side {
         FRIES, SALAD, RICE
     }
+
+    @Override
+    public String toString() {
+        return "%s with %s%s - %s x %seur".formatted(name, side, vegan ? " (V)" : "", orderedQty, price);
+    }
 }

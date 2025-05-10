@@ -1,9 +1,9 @@
 public class OrderItem implements Cloneable {
-    private String name;
-    private double price;
-    private boolean vegan;
+    protected String name;
+    protected double price;
+    protected boolean vegan;
 
-    private int orderedQty = 0;
+    protected int orderedQty = 1;
 
     public OrderItem(String name, double price, boolean vegan) {
         this.name = name;
@@ -17,6 +17,10 @@ public class OrderItem implements Cloneable {
 
     public void setOrderedQty(int orderedQty) {
         this.orderedQty = orderedQty;
+    }
+
+    public double getPrice() {
+        return price;
     }
 
     @Override

@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
@@ -7,9 +8,6 @@ public class Main {
 
         Scanner s = new Scanner(System.in);
         HashMap<String, Order> uzsakymai = new HashMap<>();
-
-        OrderItem item = Menu.getItem(1, 3);
-        System.out.println(item);
 
         Order selectedOrder = null;
         while(true) {
@@ -26,24 +24,29 @@ public class Main {
                     }
                 }
                 case "newOrder" -> {
-                    s.nextLine();
-                    String aprasymas = s.nextLine();
-                    double suma = s.nextDouble();
+                    Menu.print();
 
+                    OrderItem item = getMenuItem(s);
+                    if(item == null) break;
+
+                    // paklausiam vietoje ar issinesimui
                     System.out.println("Take-away? (y/n)");
                     boolean vietoje = !s.next().equalsIgnoreCase("y");
 
-//                    selectedOrder = new Order(aprasymas, suma, vietoje);
+                    // sukuriam uzsakyma su meniu patiekalu
+                    selectedOrder = new Order(item, vietoje);
                     uzsakymai.put(selectedOrder.getNumeris(), selectedOrder);
                     System.out.println("New order " + selectedOrder.getNumeris() + " created");
                 }
                 case "updateOrder" -> {
                     if(!uzsakymasPasirinktas(selectedOrder)) break;
+                    Menu.print();
 
-                    s.nextLine();
-                    String aprasymas = s.nextLine();
-                    double suma = s.nextDouble();
-//                    selectedOrder.papildytiUzsakyma(aprasymas, suma);
+                    OrderItem item = getMenuItem(s);
+                    if(item == null) break;
+
+                    // sukuriam uzsakyma su meniu patiekalu
+                    selectedOrder.papildytiUzsakyma(item);
                 }
                 case "orderStatus" -> {
                     if(!uzsakymasPasirinktas(selectedOrder)) break;
@@ -53,9 +56,7 @@ public class Main {
                 }
                 case "printOrder" -> {
                     if(!uzsakymasPasirinktas(selectedOrder)) break;
-
-                    System.out.println(selectedOrder.formuotiCeki());
-                    System.out.println("-------");
+                    System.out.println(selectedOrder);
                 }
                 case "quit" -> {
                     System.out.println("Shutting down");
@@ -63,6 +64,28 @@ public class Main {
                 }
                 default -> System.err.println("Invalid command. Use:\nnewOrder, updateOrder, orderStatus, printOrder, quit");
             }
+        }
+    }
+
+
+
+    public static OrderItem getMenuItem(Scanner s) {
+
+        try {
+            // nuskaitome meniu pozicija ir kieki
+            int position = s.nextInt();
+            int qty = s.nextInt();
+
+            // pagal pozicija surandame meniu patiekala
+            OrderItem item = Menu.getItem(position, qty);
+            if (item == null) {
+                System.err.println("Item " + position + " does not exist");
+            }
+            return item;
+
+        } catch (InputMismatchException e) {
+            System.err.println("Invalid character. Please use numbers only");
+            return null;
         }
     }
 

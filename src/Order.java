@@ -17,13 +17,6 @@ public class Order {
         statusas = "Pateiktas";
     }
 
-    // cekio formavimas
-    public String formuotiCeki() {
-//        return "%s - %sEur\n%s\n".formatted(numeris, suma, aprasymas) +
-//                (vietoje ? "Vietoje" : "Išsinešimui");
-        return "";
-    }
-
     // pakeisti statusa
     public void setStatusas(String statusas) {
         // patikrinam ar viskas pagaminta
@@ -42,4 +35,19 @@ public class Order {
     public String getNumeris() {
         return numeris;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        double suma = 0;
+
+        for(OrderItem item : orderItems) {
+            sb.append(item).append("\n");
+            suma += item.getOrderedQty() * item.getPrice();
+        }
+        sb.append("Total: ").append(suma).append("eur")
+                .append("\n----------------");
+        return sb.toString();
+    }
+
 }

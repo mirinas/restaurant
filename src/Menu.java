@@ -21,4 +21,12 @@ public class Menu {
         meniuDaiktoKopija.setOrderedQty(qty);
         return meniuDaiktoKopija;
     }
+
+    public static void print() {
+        int position = 1;
+        for(OrderItem item : menu) {
+            System.out.println(position + ". " + item);
+            position++;
+        }
+    }
 }
